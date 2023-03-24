@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
 const FooterComponent = () => {
-    return(
-        <>
-        <div>Working</div>
-        </>
-    )
-}
+  return (
+    <>
+      <div>Footer</div>
+    </>
+  );
+};
 
 export default FooterComponent;
