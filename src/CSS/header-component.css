@@ -1,0 +1,19 @@
+.title-img {
+  width: 80px;
+}
+
+.header-component {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid black;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  display: inline;
+  padding: 50px;
+}
