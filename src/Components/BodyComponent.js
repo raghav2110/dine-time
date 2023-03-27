@@ -1,19 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../CSS/body-component.css";
 import RestaurantCard from "./RestaurantCard";
-import { restaurant } from "../constants";
 
 const filterData = (searchTxt, restaurant) => {
   console.log(searchTxt, restaurant);
-  const data = restaurant.filter((r) => r["data"]["name"].includes(searchTxt));
+  const data = restaurant.filter((r) =>
+    r["data"]["name"].toLowerCase().includes(searchTxt.toLowerCase())
+  );
   return data;
 };
 
 const BodyComponent = () => {
   const [searchTxt, setSearchTxt] = useState("");
-  const [restaurantList, setRestaurantList] = useState(restaurant);
+  const [restaurantList, setRestaurantList] = useState([]);
+  const [filteredRestaurantList, setFilteredRestaurantList] = useState([]);
 
-  return (
+  useEffect(() => {
+    getDataFromApi();
+  }, []);
+
+  async function getDataFromApi() {
+    let reastaurantData = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.5986763&lng=73.79783479999999&page_type=DESKTOP_WEB_LISTING"
+    );
+    let data = await reastaurantData.json();
+    setFilteredRestaurantList(data?.data?.cards[2]?.data?.data?.cards);
+    setRestaurantList(data?.data?.cards[2]?.data?.data?.cards);
+    return reastaurantData;
+  }
+  if (!restaurantList) {
+    return null;
+  }
+
+  return restaurantList?.length > 0 ? (
     <>
       <div>
         <input
@@ -24,18 +43,29 @@ const BodyComponent = () => {
         />
         <button
           onClick={() => {
-            setRestaurantList(filterData(searchTxt, restaurant));
+            setFilteredRestaurantList(filterData(searchTxt, restaurantList));
           }}
         >
           Search
         </button>
       </div>
-      <div className="main-body">
-        {restaurantList.map((element) => (
-          <RestaurantCard {...element["data"]} key={element["data"]["id"]} />
-        ))}
+      <div>
+        {filteredRestaurantList?.length > 0 ? (
+          <div className="main-body">
+            {filteredRestaurantList?.map((element) => (
+              <RestaurantCard
+                {...element["data"]}
+                key={element["data"]["id"]}
+              />
+            ))}
+          </div>
+        ) : (
+          <div>No restaurant found ....</div>
+        )}
       </div>
     </>
+  ) : (
+    <h1>Shimmer Effect Loading</h1>
   );
 };
 
