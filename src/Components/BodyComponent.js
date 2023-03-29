@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "../CSS/body-component.css";
 import RestaurantCard from "./RestaurantCard";
+import Shimmer from "./Shimmer";
 
 const filterData = (searchTxt, restaurant) => {
   console.log(searchTxt, restaurant);
@@ -53,10 +55,12 @@ const BodyComponent = () => {
         {filteredRestaurantList?.length > 0 ? (
           <div className="main-body">
             {filteredRestaurantList?.map((element) => (
-              <RestaurantCard
-                {...element["data"]}
-                key={element["data"]["id"]}
-              />
+              <Link to={"/restaurant/" + element["data"]["id"]}>
+                <RestaurantCard
+                  {...element["data"]}
+                  key={element["data"]["id"]}
+                />
+              </Link>
             ))}
           </div>
         ) : (
@@ -65,7 +69,7 @@ const BodyComponent = () => {
       </div>
     </>
   ) : (
-    <h1>Shimmer Effect Loading</h1>
+    <Shimmer />
   );
 };
 

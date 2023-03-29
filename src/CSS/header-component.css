@@ -13,7 +13,7 @@ ul {
   list-style-type: none;
 }
 
-li {
+.headerLi {
   display: inline;
   padding: 50px;
 }

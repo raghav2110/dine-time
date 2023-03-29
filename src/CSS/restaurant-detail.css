@@ -1,0 +1,7 @@
+.menu {
+  display: flex;
+}
+
+.listStyle {
+  list-style-type: square;
+}

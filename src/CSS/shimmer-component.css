@@ -1,0 +1,11 @@
+.main-body {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.shimmer-card {
+  width: 300px;
+  height: 300px;
+  background-color: lightgrey;
+  margin: 20px;
+}
