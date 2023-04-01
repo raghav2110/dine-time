@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import logo from "../Assets/dine-time.png";
 import "../CSS/header-component.css";
 import { Link } from "react-router-dom";
+import useOnline from "../utils/useOnline";
 
 const Title = () => {
   return (
@@ -12,6 +13,7 @@ const Title = () => {
 };
 
 const HeaderComponent = () => {
+  const isOnline = useOnline();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <>
@@ -28,8 +30,12 @@ const HeaderComponent = () => {
             <li className="headerLi">
               <Link to="/Contact">Contact Us</Link>
             </li>
+            <li className="headerLi">
+              <Link to="/InstaMart">InstaMart</Link>
+            </li>
           </ul>
         </div>
+        <h1>{isOnline ? "✅" : "🔴"}</h1>
         {isLoggedIn ? (
           <button onClick={() => setIsLoggedIn(false)}>Login</button>
         ) : (
