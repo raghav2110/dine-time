@@ -6,6 +6,7 @@ import ContactComponent from "./Components/ContactComponent";
 import ErrorComponent from "./Components/ErrorComponent";
 import RestaurantDetail from "./Components/RestaurantDetail";
 import Shimmer from "./Components/Shimmer";
+import CartComponent from "./Components/CartComponent";
 const InstaMart = lazy(() => import("./Components/Instamart"));
 const AboutComponent = lazy(() => import("./Components/AboutComponent"));
 
@@ -46,6 +47,10 @@ export const appRouter = createBrowserRouter([
             <InstaMart />
           </Suspense>
         ),
+      },
+      {
+        path: "/CartComponent",
+        element: <CartComponent />,
       },
     ],
   },
