@@ -6,7 +6,8 @@ const useRestaurantDetail = (resID) => {
 
   useEffect(() => {
     getRestaurantDetails();
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function getRestaurantDetails() {
     const data = await fetch(MENU_CDN_URL + resID);

@@ -3,11 +3,18 @@ import Shimmer from "./Shimmer";
 import { IMG_CDN_URL } from "../constants";
 import "../CSS/restaurant-detail.css";
 import useRestaurantDetail from "../utils/useRestaurantDetail";
+import { addItem } from "../utils/cartSlice";
+import { useDispatch } from "react-redux";
 
 const RestaurantDetail = () => {
   const { resID } = useParams();
 
   const restaurantMenu = useRestaurantDetail(resID);
+  const dispatch = useDispatch();
+
+  const addFoodItem = (item) => {
+    dispatch(addItem(item));
+  };
 
   return !restaurantMenu ? (
     <Shimmer />
@@ -41,7 +48,10 @@ const RestaurantDetail = () => {
                       <ul key={index}>
                         {e?.card?.card?.itemCards.map((e) => (
                           <li className="listStyle" key={e.card.info.id}>
-                            {e.card.info.name}
+                            {e.card.info.name} -{console.log(e.card.info)}
+                            <button onClick={() => addFoodItem(e.card.info)}>
+                              Add To Cart
+                            </button>
                           </li>
                         ))}
                       </ul>

@@ -3,6 +3,7 @@ import logo from "../Assets/dine-time.png";
 import "../CSS/header-component.css";
 import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
+import { useSelector } from "react-redux";
 
 const Title = () => {
   return (
@@ -15,6 +16,7 @@ const Title = () => {
 const HeaderComponent = () => {
   const isOnline = useOnline();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const cartItems = useSelector((store)=>store.cart.items)
   return (
     <>
       <div className="header-component">
@@ -32,6 +34,9 @@ const HeaderComponent = () => {
             </li>
             <li className="headerLi">
               <Link to="/InstaMart">InstaMart</Link>
+            </li>
+            <li className="headerLi">
+              <Link to="/CartComponent">Cart - {cartItems.length} items</Link>
             </li>
           </ul>
         </div>
